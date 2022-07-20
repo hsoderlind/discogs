@@ -2,9 +2,10 @@
 
 namespace Hsoderlind\Discogs\Api\Model;
 
+use JsonSerializable;
 use stdClass;
 
-class Model implements ResponseInterface
+class Model implements ResponseInterface, JsonSerializable
 {
 	/**
 	 * @var stdClass
@@ -105,5 +106,10 @@ class Model implements ResponseInterface
 		if (!empty($this->_data)) {
 			return json_encode($this->_data);
 		}
+	}
+
+	public function jsonSerialize()
+	{
+		return $this->_data;
 	}
 }

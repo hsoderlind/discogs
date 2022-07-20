@@ -6,6 +6,7 @@ use stdClass;
 use Iterator;
 use ArrayAccess;
 use Exception;
+use JsonSerializable;
 use RuntimeException;
 
 /**
@@ -13,7 +14,7 @@ use RuntimeException;
  * 
  * @property-read Pagination $pagination
  */
-class Collection implements Iterator, ArrayAccess, ResponseInterface
+class Collection implements Iterator, ArrayAccess, ResponseInterface, JsonSerializable
 {
 	/**
 	 * @var int
@@ -257,10 +258,23 @@ class Collection implements Iterator, ArrayAccess, ResponseInterface
 		$items = $this->all();
 		$json = [];
 
-		foreach ($items as $index => $item) {
+		foreach ($items as $item) {
 			$json[] = $item->toJson();
 		}
 
 		return '[' . implode(',', $json) . ']';
+	}
+
+	public function jsonSerialize()
+	{
+		$items = $this->all();
+		$array = [];
+
+		/** @var Model $item */
+		foreach ($items as $item) {
+			$array[] = $item->jsonSerialize();
+		}
+
+		return $array;
 	}
 }
