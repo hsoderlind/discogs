@@ -4,6 +4,8 @@ namespace Hsoderlind\Discogs\Api;
 
 use Hsoderlind\Discogs\Client\Client;
 use BadMethodCallException;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ServerException;
 use InvalidArgumentException;
 use Hsoderlind\Discogs\Api\Exception\NotFoundException;
 use Hsoderlind\Discogs\Api\Exception\RemoteServerErrorException;
@@ -91,8 +93,14 @@ class Service
 
 		try {
 			$response = $this->_client->request($method, $uri, $requestOptions);
-		} catch (\Throwable $ex) {
-			throw new RemoteServerErrorException('Request failed with message: ' . $ex->getMessage(), 0, $ex);
+		} catch (ClientException $ex) {
+			$response = $ex->getResponse();
+			$json = json_decode($response->getBody());
+			throw new NotFoundException($json['message']);
+		} catch (ServerException $ex) {
+			$response = $ex->getResponse();
+			$json = json_decode($response->getBody());
+			throw new RemoteServerErrorException($json['message']);
 		}
 
 		$this->validateResponse($response);
