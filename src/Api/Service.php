@@ -89,7 +89,11 @@ class Service
 			$requestOptions['json'] = $json;
 		}
 
-		$response = $this->_client->request($method, $uri, $requestOptions);
+		try {
+			$response = $this->_client->request($method, $uri, $requestOptions);
+		} catch (\Throwable $ex) {
+			throw new RemoteServerErrorException('Request failed with message: ' . $ex->getMessage(), 0, $ex);
+		}
 
 		$this->validateResponse($response);
 
