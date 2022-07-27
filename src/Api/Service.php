@@ -96,11 +96,11 @@ class Service
 		} catch (ClientException $ex) {
 			$response = $ex->getResponse();
 			$json = json_decode($response->getBody());
-			throw new NotFoundException($json['message']);
+			throw new NotFoundException($json->message);
 		} catch (ServerException $ex) {
 			$response = $ex->getResponse();
 			$json = json_decode($response->getBody());
-			throw new RemoteServerErrorException($json['message']);
+			throw new RemoteServerErrorException($json->message);
 		}
 
 		$this->validateResponse($response);
@@ -113,9 +113,9 @@ class Service
 		$json = json_decode($response->getBody());
 
 		if ($response->getStatusCode() === 404) {
-			throw new NotFoundException($json['message']);
+			throw new NotFoundException($json->message);
 		} elseif ($response->getStatusCode() === 500) {
-			throw new RemoteServerErrorException($json['message']);
+			throw new RemoteServerErrorException($json->message);
 		}
 
 		return true;
