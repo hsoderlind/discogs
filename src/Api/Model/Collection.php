@@ -126,7 +126,7 @@ class Collection implements Iterator, ArrayAccess, ResponseInterface, JsonSerial
 	 */
 	public function valid(): bool
 	{
-		return isset($this->_items[$this->_post]);
+		return isset($this->_items[$this->_pos]);
 	}
 
 	/**
