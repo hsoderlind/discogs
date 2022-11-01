@@ -55,7 +55,7 @@ class Model implements ResponseInterface, JsonSerializable
 	 */
 	public function setData($data)
 	{
-		$this->_data = json_decode(json_encode($data), true);
+		$this->_data = json_decode(json_encode($data));
 	}
 
 	/**
