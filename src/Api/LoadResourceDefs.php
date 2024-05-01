@@ -17,7 +17,7 @@ class LoadResourceDefs
 			throw new InvalidArgumentException('File ' . $resourceFile . ' does not exists');
 		}
 
-		require_once($resourceFile);
+		$this->definitions = require_once($resourceFile);
 	}
 
 	public function __get($name)
