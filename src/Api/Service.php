@@ -60,7 +60,7 @@ class Service
 			throw new InvalidArgumentException('File ' . $resourceFile . ' does not exists');
 		}
 
-		self::$RESOURCES[$serviceName] = require_once($resourceFile);
+		self::$RESOURCES[$serviceName] = require $resourceFile;
 	}
 
 	public function __call(string $name, ?array $arguments = null): mixed

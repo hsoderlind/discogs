@@ -2,6 +2,7 @@
 
 namespace Hsoderlind\Discogs\Api;
 
+use Hsoderlind\Discogs\Api\Model\Response;
 use Hsoderlind\Discogs\Exceptions\InvalidParameterTypeException;
 use Hsoderlind\Discogs\Exceptions\InvalidParameterValueException;
 use Hsoderlind\Discogs\Exceptions\RequiredParameterException;
@@ -22,6 +23,11 @@ class Resource
 	const RESOURCE_SEARCH       =   'search';
 	const RESOURCE_USER         =   'user';
 	const RESOURCE_WANTLIST     =   'wantlist';
+
+	/**
+	 * @var string
+	 */
+	private $_name;
 
 	/**
 	 * @var string
