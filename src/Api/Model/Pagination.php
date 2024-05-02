@@ -125,4 +125,15 @@ final class Pagination
 
 		return $headers;
 	}
+
+	public function toArray(): array
+	{
+		return [
+			'per_page' => $this->_perPage,
+			'pages' => $this->_pages,
+			'page' => $this->_page,
+			'urls' => $this->_urls,
+			'items' => $this->_items
+		];
+	}
 }
