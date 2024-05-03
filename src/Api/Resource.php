@@ -126,9 +126,9 @@ class Resource
 			case 'boolean':
 				return is_bool($value);
 			case 'integer':
-				return is_int($value);
+				return is_int($value) || is_int((int)$value);
 			case 'double':
-				return is_double($value);
+				return is_double($value) || is_double((double)$value);
 			case 'string':
 				return is_string($value);
 		}
