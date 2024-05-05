@@ -1,6 +1,7 @@
 <?php
 
 use Hsoderlind\Discogs\Api\Model\Collection;
+use Hsoderlind\Discogs\Api\Model\Model;
 
 return [
     // Returns the list of releases in a user’s wantlist.
@@ -49,7 +50,7 @@ return [
                 'position' => 'query'
             ]
         ],
-        'response' => Collection::class
+        'response' => Model::class
     ],
 
     // Remove a release from user's wantlist
